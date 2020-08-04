@@ -26,8 +26,17 @@
   margin: 0.4rem 0;
 }
 
-.list-form button {
+.btn-add {
   display: block;
   width: 20rem;
   margin-bottom: 1rem;
+}
+
+.lst-item li span {
+  display: inline-block;
+  min-width: 5rem;
+}
+
+.done {
+  text-decoration: line-through;
 }

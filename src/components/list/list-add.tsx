@@ -34,7 +34,11 @@ class ListAdd extends React.Component<IProps> {
             Item to buy:
             <input value={itemName} onChange={this.setItemName} />
           </label>
-          <button onClick={this.addItem} disabled={!itemName}>
+          <button
+            className="btn-add"
+            onClick={this.addItem}
+            disabled={!itemName}
+          >
             Add
           </button>
         </form>
@@ -53,6 +57,7 @@ const mapDispatchToProps = (dispatch: any) => {
     addItem: (name: string) => dispatch(addItem(name))
   };
 };
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps
