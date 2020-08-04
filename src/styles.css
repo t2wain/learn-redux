@@ -1,0 +1,33 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.counter {
+  width: 10rem;
+  padding-bottom: 2rem;
+  margin: 2rem auto;
+  border: 1px solid black;
+}
+
+.count {
+  padding: 1em;
+}
+
+.list-form {
+  width: 20rem;
+  margin: 2rem auto;
+  text-align: left;
+}
+
+.list-form input {
+  display: block;
+  width: 19.5rem;
+  margin: 0.4rem 0;
+}
+
+.list-form button {
+  display: block;
+  width: 20rem;
+  margin-bottom: 1rem;
+}
