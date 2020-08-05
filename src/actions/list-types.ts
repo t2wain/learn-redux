@@ -1,18 +1,29 @@
 export enum ListActionTypes {
-  ADD_ITEM = "ADD_ITEM",
   DEL_ITEM = "DEL_ITEM",
-  TOG_ITEM = "TOG_ITEM"
+  TOG_ITEM = "TOG_ITEM",
+  ADD_ITEM_BEGIN = "ADD_ITEM_BEGIN",
+  ADD_ITEM_SUCCESS = "ADD_ITEM_SUCCESS",
+  ADD_ITEM_ERROR = "ADD_ITEM_ERROR"
 }
 
 export interface IItem {
-  id: number;
+  id?: number;
   name: string;
   checked: boolean;
 }
 
-export interface IListAddItemAction {
-  type: ListActionTypes.ADD_ITEM;
+export interface IListAddItemBeginAction {
+  type: ListActionTypes.ADD_ITEM_BEGIN;
+}
+
+export interface IListAddItemSuccessAction {
+  type: ListActionTypes.ADD_ITEM_SUCCESS;
   item: IItem;
+}
+
+export interface IListAddItemErrorAction {
+  type: ListActionTypes.ADD_ITEM_ERROR;
+  errmsg: string;
 }
 
 export interface IListDelItemAction {
@@ -26,6 +37,8 @@ export interface IListToggleItemAction {
 }
 
 export type ListActions =
-  | IListAddItemAction
+  | IListAddItemBeginAction
+  | IListAddItemSuccessAction
+  | IListAddItemErrorAction
   | IListDelItemAction
   | IListToggleItemAction;

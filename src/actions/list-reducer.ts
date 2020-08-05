@@ -6,8 +6,12 @@ export const listReducer: Reducer<IItem[], ListActions> = (
   action
 ) => {
   switch (action.type) {
-    case ListActionTypes.ADD_ITEM:
+    case ListActionTypes.ADD_ITEM_BEGIN:
+      return state;
+    case ListActionTypes.ADD_ITEM_SUCCESS:
       return [...state, action.item];
+    case ListActionTypes.ADD_ITEM_ERROR:
+      return state;
     case ListActionTypes.DEL_ITEM:
       return state.filter(i => i.id !== action.itemId);
     case ListActionTypes.TOG_ITEM:

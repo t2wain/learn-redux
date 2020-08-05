@@ -1,4 +1,5 @@
-import { createStore, Store, combineReducers } from "redux";
+import { createStore, Store, combineReducers, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
 import { counterReducer } from "../actions/counter-reducer";
 import { listReducer } from "../actions/list-reducer";
 import { IItem } from "../actions/list-types";
@@ -14,6 +15,6 @@ const rootReducer = combineReducers<IAppState>({
 });
 
 export default function configureStore(): Store<IAppState> {
-  const store = createStore(rootReducer);
+  const store = createStore(rootReducer, applyMiddleware(thunk));
   return store;
 }

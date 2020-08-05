@@ -3,11 +3,11 @@ import { connect } from "react-redux";
 import { IAppState } from "../../store/store";
 import { IItem } from "../../actions/list-types";
 import List from "./list";
-import { addItem, delItem, toggleItem } from "../../actions/list-actions";
+import { addItemAction, delItem, toggleItem } from "../../actions/list-actions";
 
 interface IProps {
   items: IItem[];
-  addItem: typeof addItem;
+  addItem: typeof addItemAction;
   delItem: typeof delItem;
   toggleItem: typeof toggleItem;
 }
@@ -94,7 +94,7 @@ function mapStateToProps(state: IAppState) {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    addItem: (name: string) => dispatch(addItem(name)),
+    addItem: (name: string) => dispatch(addItemAction(name)),
     delItem: (itemId: number) => dispatch(delItem(itemId)),
     toggleItem: (itemId: number) => dispatch(toggleItem(itemId))
   };
