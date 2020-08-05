@@ -1,7 +1,5 @@
 import React from "react";
-import { connect } from "react-redux";
 import { IItem } from "../../actions/list-types";
-import { IAppState } from "../../store/store";
 import { delItem, toggleItem } from "../../actions/list-actions";
 
 interface IProps {
@@ -10,7 +8,7 @@ interface IProps {
   toggleItem: typeof toggleItem;
 }
 
-export const List: React.SFC<IProps> = ({ items, delItem, toggleItem }) => {
+const List: React.SFC<IProps> = ({ items, delItem, toggleItem }) => {
   return items.length ? (
     <ul className="lst-item">
       {items.map(item => (
@@ -26,20 +24,4 @@ export const List: React.SFC<IProps> = ({ items, delItem, toggleItem }) => {
   );
 };
 
-function mapStateToProps(state: IAppState) {
-  return {
-    items: state.items
-  };
-}
-
-const mapDispatchToProps = (dispatch: any) => {
-  return {
-    delItem: (itemId: number) => dispatch(delItem(itemId)),
-    toggleItem: (itemId: number) => dispatch(toggleItem(itemId))
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(List);
+export default List;

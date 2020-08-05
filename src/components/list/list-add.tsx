@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { IAppState } from "../../store/store";
+import { IItem } from "../../actions/list-types";
 import List from "./list";
-import { addItem } from "../../actions/list-actions";
+import { addItem, delItem, toggleItem } from "../../actions/list-actions";
 
 interface IProps {
+  items: IItem[];
   addItem: typeof addItem;
+  delItem: typeof delItem;
+  toggleItem: typeof toggleItem;
 }
 
-class ListAdd extends React.Component<IProps> {
+export class ListAddOld extends React.Component<IProps> {
   state = {
     itemName: ""
   };
@@ -42,19 +46,57 @@ class ListAdd extends React.Component<IProps> {
             Add
           </button>
         </form>
-        <List />
+        <List
+          items={this.props.items}
+          delItem={this.props.delItem}
+          toggleItem={this.props.toggleItem}
+        />
       </div>
     );
   }
 }
 
+const ListAdd: React.SFC<IProps> = props => {
+  const [itemName, setItemName] = useState("");
+
+  let handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setItemName(e.target.value);
+  };
+
+  let addItem = () => {
+    props.addItem(itemName);
+    setItemName("");
+  };
+
+  return (
+    <div className="list-form">
+      <form onSubmit={e => e.preventDefault()}>
+        <label htmlFor="">
+          Item to buy:
+          <input value={itemName} onChange={handleChange} />
+        </label>
+        <button className="btn-add" onClick={addItem} disabled={!itemName}>
+          Add
+        </button>
+      </form>
+      <List
+        items={props.items}
+        delItem={props.delItem}
+        toggleItem={props.toggleItem}
+      />
+    </div>
+  );
+};
+
 function mapStateToProps(state: IAppState) {
-  return {};
+  return { items: state.items };
 }
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    addItem: (name: string) => dispatch(addItem(name))
+    addItem: (name: string) => dispatch(addItem(name)),
+    delItem: (itemId: number) => dispatch(delItem(itemId)),
+    toggleItem: (itemId: number) => dispatch(toggleItem(itemId))
   };
 };
 

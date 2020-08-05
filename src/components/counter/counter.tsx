@@ -9,7 +9,7 @@ interface IProps {
   decrement: typeof decrement;
 }
 
-class Counter extends React.Component<IProps> {
+export class CounterOld extends React.Component<IProps> {
   public static defaultProps = {
     count: 0
   };
@@ -35,6 +35,19 @@ class Counter extends React.Component<IProps> {
     );
   }
 }
+
+const Counter: React.SFC<IProps> = ({ count, increment, decrement }) => {
+  return (
+    <div className="counter">
+      <h2>Counter</h2>
+      <div>
+        <button onClick={decrement}>-</button>
+        <span className="count">{count}</span>
+        <button onClick={increment}>+</button>
+      </div>
+    </div>
+  );
+};
 
 function mapStateToProps(state: IAppState) {
   return {
