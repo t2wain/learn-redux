@@ -8,7 +8,7 @@ interface IProps {
   toggleItem: typeof toggleItem;
 }
 
-const List: React.SFC<IProps> = ({ items, delItem, toggleItem }) => {
+const List: React.FC<IProps> = ({ items, delItem, toggleItem }) => {
   return items.length ? (
     <ul className="lst-item">
       {items.map(item => (

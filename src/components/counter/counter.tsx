@@ -36,7 +36,7 @@ export class CounterOld extends React.Component<IProps> {
   }
 }
 
-const Counter: React.SFC<IProps> = ({ count, increment, decrement }) => {
+const Counter: React.FC<IProps> = ({ count, increment, decrement }) => {
   return (
     <div className="counter">
       <h2>Counter</h2>

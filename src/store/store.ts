@@ -2,16 +2,16 @@ import { createStore, Store, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { counterReducer } from "../actions/counter-reducer";
 import { listReducer } from "../actions/list-reducer";
-import { IItem } from "../actions/list-types";
+import { IList } from "../actions/list-types";
 
 export interface IAppState {
   count: number;
-  items: IItem[];
+  list: IList;
 }
 
 const rootReducer = combineReducers<IAppState>({
   count: counterReducer,
-  items: listReducer
+  list: listReducer
 });
 
 export default function configureStore(): Store<IAppState> {

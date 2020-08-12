@@ -10,9 +10,11 @@ export default function App() {
   return (
     <Provider store={configureStore()}>
       <div className="App">
-        <h1>Learn Redux</h1>
-        <Counter />
-        <ListAdd />
+        <form onSubmit={(e) => e.preventDefault()}>
+          <h1>Learn Redux</h1>
+          <Counter />
+          <ListAdd />
+        </form>
       </div>
     </Provider>
   );

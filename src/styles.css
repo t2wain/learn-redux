@@ -26,10 +26,14 @@
   margin: 0.4rem 0;
 }
 
+.list-status {
+  text-align: center;
+}
+
 .btn-add {
   display: block;
   width: 20rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.4rem;
 }
 
 .lst-item li span {
