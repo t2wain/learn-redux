@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
+import { DefaultButton } from "office-ui-fabric-react";
+import { TextField } from "office-ui-fabric-react/lib/TextField";
 import { IAppState } from "../../../store/store";
 import { IList, ListStatus } from "../../../actions/list-types";
 import List from "./list";
@@ -9,7 +9,7 @@ import {
   addItemAction,
   delItem,
   toggleItem,
-  loadItemsAction,
+  loadItemsAction
 } from "../../../actions/list-actions";
 
 interface IProps {
@@ -22,16 +22,17 @@ interface IProps {
 
 const ListAdd: React.FC<IProps> = (props) => {
   const [itemName, setItemName] = useState("");
-  let txtitem: React.RefObject<HTMLInputElement> = React.createRef();
 
-  let handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setItemName(e.target.value);
+  let handleChange = (
+    e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
+    newValue?: string | undefined
+  ) => {
+    setItemName(newValue || "");
   };
 
   let addItem = () => {
     props.addItem(itemName);
     setItemName("");
-    txtitem.current?.focus();
   };
 
   let msg = "Ready";
@@ -48,32 +49,33 @@ const ListAdd: React.FC<IProps> = (props) => {
   }
 
   return (
-    <div className="list-form">
-      <Form onSubmit={(e) => e.preventDefault()}>
-        <Form.Group>
-          <Form.Control
-            type="text"
-            placeholder="Enter item"
-            value={itemName}
-            ref={txtitem}
-            onChange={handleChange}
-          />
-        </Form.Group>
-
-        <Button block type="submit" onClick={addItem} disabled={!itemName}>
-          Add
-        </Button>
-        <Button block onClick={props.loadItems}>
-          Load Items
-        </Button>
-        <h3 className="list-status">{msg}</h3>
-        <List
-          items={props.list.items}
-          delItem={props.delItem}
-          toggleItem={props.toggleItem}
+    <form onSubmit={(e) => e.preventDefault()}>
+      <div className="list-form">
+        <TextField
+          placeholder="Enter item"
+          value={itemName}
+          onChange={handleChange}
         />
-      </Form>
-    </div>
+        <DefaultButton
+          style={{ width: "100%", margin: "0.5rem 0" }}
+          type="submit"
+          onClick={addItem}
+          disabled={!itemName}
+        >
+          Add
+        </DefaultButton>
+        <DefaultButton style={{ width: "100%" }} onClick={props.loadItems}>
+          Load Items
+        </DefaultButton>
+        <h3 className="list-status">{msg}</h3>
+      </div>
+
+      <List
+        items={props.list.items}
+        delItem={props.delItem}
+        toggleItem={props.toggleItem}
+      />
+    </form>
   );
 };
 
@@ -86,7 +88,7 @@ const mapDispatchToProps = (dispatch: any) => {
     addItem: (name: string) => dispatch(addItemAction(name)),
     delItem: (itemId: number) => dispatch(delItem(itemId)),
     toggleItem: (itemId: number) => dispatch(toggleItem(itemId)),
-    loadItems: () => dispatch(loadItemsAction()),
+    loadItems: () => dispatch(loadItemsAction())
   };
 };
 

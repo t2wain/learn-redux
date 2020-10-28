@@ -1,5 +1,5 @@
 import { ActionCreator } from "redux";
-import { createItemLocal, loadItemsLocal as loadList } from "../api";
+import { createItemLocal, loadItems as loadList } from "../api";
 import {
   ListActionTypes,
   IListDelItemAction,

@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Provider } from "react-redux";
+import { HashRouter as Router, Route } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import configureStore from "../store/store";
 import Counter from "./components/counter/counter";
@@ -12,11 +13,15 @@ import "./styles.css";
 export default function App() {
   return (
     <Provider store={configureStore()}>
-      <TopNav />
-      <Container fluid className="app">
-        <Counter />
-        <ListAdd />
-      </Container>
+      <Router>
+        <TopNav />
+        <Container fluid className="app">
+          <Route path="/counter" component={Counter} />
+          <Route path="/list" component={ListAdd} />
+          <Route exact path="/" component={Counter} />
+          <Route exact path="/" component={ListAdd} />
+        </Container>
+      </Router>
     </Provider>
   );
 }
