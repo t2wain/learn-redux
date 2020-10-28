@@ -22,16 +22,6 @@ export const loadItemsLocal = (isError?: boolean) => {
   });
 };
 
-export const createItemApi = (name: string) => {
-  return postData("/items", { name });
-};
-
-export const loadItems = () => {
-  return getData(
-    "https://hub.kbr.com/es/_api/lists?$select=Title"
-  ).then((res) => res.d.results.map((l: any) => l.Title));
-};
-
 function postData(url = "", data = {}) {
   return fetch(url, {
     method: "POST",
@@ -45,9 +35,27 @@ function postData(url = "", data = {}) {
 function getData(url = "") {
   return fetch(url, {
     method: "GET",
-    credentials: "include",
+    mode: "cors",
     headers: {
       Accept: "application/json;odata=verbose"
     }
   }).then((response) => response.json());
 }
+
+export const createItemApi = (name: string) => {
+  return postData("/items", { name });
+};
+
+export const loadItems = () => {
+  return getData(
+    "https://t2wain-adventureworks-odata.azurewebsites.net/odata/customers?$filter=SalesOrderHeader/any(so:so/SalesOrderId%20gt%200)"
+  ).then(
+    (res) => {
+      //console.log("Result:", res.value);
+      return res.value.map((l: any) => l.LastName);
+    },
+    (err) => {
+      console.log("Error:", err);
+    }
+  );
+};
